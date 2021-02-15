@@ -7,7 +7,6 @@ const MovieSchema = new Schema({
   inStock: { type: Number, required: true, max: 999, min: 0 },
   price: { type: Number, max: 999999, min: 0, required: true },
   genre: { type: Schema.Types.ObjectId, ref: 'Genre', required: true },
-  director: { type: Schema.Types.ObjectId, ref: 'Director', required: true },
   fileName: { type: String },
 });
 
