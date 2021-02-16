@@ -1,6 +1,7 @@
 const { validationResult, body } = require('express-validator');
 const async = require('async');
 const fs = require('fs');
+
 const Movie = require('../models/movie');
 const Genre = require('../models/genre');
 
