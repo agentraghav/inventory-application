@@ -1,0 +1,40 @@
+<%- include('header')%>
+<div class="container my-6">
+  <h1 class="title has-text-centered"><%= movie.name%></h1>
+  <div class="is-flex is-justify-content-center">
+    <figure class="image is-128x128 mb-5">
+      <img class="image is-128x128" src="/<%= movie.image %>" />
+    </figure>
+  </div>
+
+  <table class="table is-fullwidth is-size-4 my-5">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <td><%= movie.name%></td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td><%= movie.description %></td>
+      </tr>
+      <tr>
+        <th>Price</th>
+        <td><%= movie.price %>$</td>
+      </tr>
+      <tr>
+        <th>Number Stock</th>
+        <td><%= movie.inStock %> in stock.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="buttons my-6">
+    <a class="button is-size-5 is-primary" href="/movie/<%= movie._id %>/update"
+      >Update</a
+    >
+    <a class="button is-size-5 is-danger" href="/movie/<%= movie._id %>/delete"
+      >Delete</a
+    >
+  </div>
+</div>
+<%- include('footer')%>
