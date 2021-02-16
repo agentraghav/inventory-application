@@ -18,3 +18,7 @@ exports.genreList = (req, res, next) => {
     });
   });
 };
+
+exports.genreCreateGet = (req, res, next) => {
+  res.render('genre_form');
+};
