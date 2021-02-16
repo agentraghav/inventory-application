@@ -70,7 +70,7 @@ exports.genreDeleteGet = (req, res, next) => {
       if (results.genre === null) {
         const err = new Error('Not Found');
         err.status = 404;
-        return next(error);
+        return next(err);
       }
       res.render('genre_delete', {
         genre: results.genre,
@@ -79,3 +79,5 @@ exports.genreDeleteGet = (req, res, next) => {
     }
   );
 };
+
+exports.genreDeletePost = (req, res, next) => {};
