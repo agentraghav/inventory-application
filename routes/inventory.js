@@ -11,4 +11,5 @@ router.get('/', genre_controller.index);
 
 router.get('/genres', genre_controller.genreList);
 
+router.get('/genres/create', genre_controller.genreCreateGet);
 module.exports = router;

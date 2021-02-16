@@ -8,7 +8,7 @@
           type="text"
           name="name"
           placeholder="e.g Guitars"
-          value="<%= genre.name %>"
+          value="<%= locals.genre === undefined ? '' : locals.genre.name %>"
           required
         />
       </div>
@@ -17,15 +17,18 @@
     <div class="field">
       <label class="label">Image</label>
       <div class="control">
-        <% if(genre) {%>
+        <% if(locals.genre) {%>
         <figure class="image is-128x128">
-          <img class="image is-128x128" src="/{{ genre.image }}" />
+          <img
+            class="image is-128x128"
+            src="/<%= locals.genre === undefined ? '' : locals.genre.image %>"
+          />
         </figure>
         <input
           class="input"
           type="file"
           name="image"
-          value="{{ genre.image }}"
+          value="<%= locals.genre === undefined ? '' : locals.genre.image %>"
         />
         <%} else { %>
         <input class="input" type="file" name="image" required />
@@ -33,7 +36,7 @@
       </div>
     </div>
 
-    <% if(genre) {%>
+    <% if(locals.genre) {%>
     <div class="field">
       <label class="label">Admin password</label>
       <div class="control has-icons-left">
@@ -47,13 +50,15 @@
 
     <div class="buttons my-6">
       <button class="button is-info">Submit</button>
-      <a href="/categories" class="button">Go back</a>
+      <a href="/genres" class="button">Go back</a>
     </div>
   </form>
 
   <div class="my-3">
-    <% map.errors(val=>{ %>
-    <p class="subtitle has-text-danger">Error: <%= val.msg %></p>
+    <% locals.errors === undefined ? '' : locals.errors.map(val=>{ %>
+    <p class="subtitle has-text-danger">
+      Error: <%= val.msg === undefined ? '' : val.msg %>
+    </p>
     <%}) %>
   </div>
 </div>
