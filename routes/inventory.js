@@ -6,6 +6,7 @@ const path = require('path');
 const genre_controller = require('../controllers/genreController');
 const movie_controller = require('../controllers/movieController');
 const genre_validation = require('../validators/genreValidation');
+const movie_validation = require('../validators/movieValidation');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -51,5 +52,12 @@ router.get('/genres/:id/movie', genre_controller.genreMovie);
 router.get('/movie', movie_controller.movieList);
 
 router.get('/movie/create', movie_controller.movieCreateGet);
+
+router.post(
+  '/movie/create',
+  upload.single('image'),
+  movie_validation.movie_form_validation,
+  movie_controller.movieCreatePost
+);
 
 module.exports = router;
