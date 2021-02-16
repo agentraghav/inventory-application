@@ -9,12 +9,12 @@ exports.index = (req, res, next) => {
 };
 
 exports.genreList = (req, res, next) => {
-  Genre.find.exec((err, genres) => {
+  Genre.find().exec((err, genre) => {
     if (err) {
       return next(err);
     }
     res.render('genre_list', {
-      genres,
+      genre,
     });
   });
 };

@@ -3,13 +3,12 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 
-const genre_controller = require('../models/genre');
-const movie_controller = require('../models/movie');
+const genre_controller = require('../controllers/genreController');
 
 /* GET home page. */
 
 router.get('/', genre_controller.index);
 
-router.get('/genres', genreController.genreList);
+router.get('/genres', genre_controller.genreList);
 
 module.exports = router;
