@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 
 const genre_controller = require('../controllers/genreController');
+const movie_controller = require('../controllers/movieController');
 const genre_validation = require('../validators/genreValidation');
 
 const storage = multer.diskStorage({
@@ -46,5 +47,7 @@ router.post(
 );
 
 router.get('/genres/:id/movie', genre_controller.genreMovie);
+
+router.get('/movie', movie_controller.movieList);
 
 module.exports = router;
