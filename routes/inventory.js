@@ -32,8 +32,19 @@ router.post(
   genre_controller.genreCreatePost
 );
 
-router.get('/genres/delete', genre_controller.genreDeleteGet);
+router.get('/genres/:id/delete', genre_controller.genreDeleteGet);
 
-router.post('/genres/delete', genre_controller.genreDeletePost);
+router.post('/genres/:id/delete', genre_controller.genreDeletePost);
+
+router.get('/genres/:id/update', genre_controller.genreUpdateGet);
+
+router.post(
+  '/genres/:id/update',
+  upload.single('image'),
+  genre_validation.genre_form_validation,
+  genre_controller.genreUpdatePost
+);
+
+router.get('/genres/:id/movie', genre_controller.genreMovie);
 
 module.exports = router;
