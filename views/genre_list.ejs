@@ -1,0 +1,32 @@
+<%- include('header')%>
+
+<div class="container my-5">
+  <a href="genre/create" class="button is-primary my-4">Add a new Genre</a>
+  <% genre.map(val=>{ %>
+  <nav class="level my-5">
+    <div class="level-left">
+      <div class="level-item is-flex is-align-items-center">
+        <figure class="image is-128x128">
+          <img class="image is-128x128" src=" <%= val.image %>" />
+        </figure>
+      </div>
+      <p class="title ml-3 has-text-centered"><%= val.name %></p>
+    </div>
+
+    <div class="level-right">
+      <p class="level-item">
+        <a href="/genre/<%= val._id %>/update">Update</a>
+      </p>
+      <p class="level-item">
+        <a href="/genre/<%= val._id %>/delete">Delete</a>
+      </p>
+      <p class="level-item">
+        <a href="/genre/<%= val._id %>/items" class="button is-success"
+          >View Items</a
+        >
+      </p>
+    </div>
+  </nav>
+  <hr />
+  <% }) %>
+</div>
