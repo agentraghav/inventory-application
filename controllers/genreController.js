@@ -117,3 +117,79 @@ exports.genreDeletePost = (req, res, next) => {
     }
   );
 };
+
+exports.genreUpdateGet = (req, res, next) => {
+  const { id } = req.params;
+  Genre.findById(id).exec((error, genre) => {
+    if (error) {
+      return next(error);
+    }
+    res.render('genre_form', {
+      genre,
+    });
+  });
+};
+
+exports.genreUpdatePost = (req, res, next) => {
+  const errors = validationResult(req);
+
+  const { name } = req.body;
+  const { id } = req.params;
+  const { path } = req.file;
+  const genre = new Genre({
+    name: name,
+    _id: id,
+  });
+
+  if (req.file) {
+    Genre.image = path;
+  }
+
+  if (!errors.isEmpty()) {
+    fs.unlink(path, (err) => {
+      if (err) {
+        return next(err);
+      }
+    });
+    res.render('genre_form', {
+      genre,
+      errors: errors.array(),
+    });
+  } else {
+    Genre.findByIdAndUpdate(id, genre, {}, (error, thegenre) => {
+      if (error) {
+        return next(error);
+      }
+      res.redirect(thegenre.url);
+    });
+  }
+};
+
+exports.genreMovie = (req, res, next) => {
+  const { id } = req.params;
+  async.parallel(
+    {
+      genre: (callback) => {
+        Genre.findById(id).exec(callback);
+      },
+      movie: (callback) => {
+        Movie.find({ genre: id }).exec(callback);
+      },
+    },
+    (error, results) => {
+      if (error) {
+        return next(error);
+      }
+      if (results.genre === null) {
+        const err = new Error('Not Found');
+        err.status = 404;
+        return next(err);
+      }
+
+      res.render('genre_movie', {
+        genre: results.genre,
+        movie: results.movie,
+      });
+    }
+  );
+};
