@@ -112,7 +112,7 @@ exports.movieUpdateGet = (req, res, next) => {
   );
 };
 
-exports.itemUpdatePost = (req, res, next) => {
+exports.movieUpdatePost = (req, res, next) => {
   const errors = validationResult(req);
   const { name, description, price, number_stock, genre } = req.body;
   const { id } = req.params;

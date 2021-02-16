@@ -60,4 +60,16 @@ router.post(
   movie_controller.movieCreatePost
 );
 
+router.get('/movie/:id/delete', movie_controller.movieDeleteGet);
+router.post('/movie/:id/delete', movie_controller.movieDeletePost);
+router.get('/movie/:id/update', movie_controller.movieUpdateGet);
+router.post(
+  '/movie/:id/update',
+  upload.single('image'),
+  movie_validation.movie_form_validation,
+  movie_controller.movieUpdatePost
+);
+
+router.get('/movie/:id', movie_controller.movieDetail);
+
 module.exports = router;
