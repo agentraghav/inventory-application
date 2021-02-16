@@ -28,7 +28,7 @@ exports.genreCreatePost = (req, res, next) => {
   const { name } = req.body;
   const { image } = req.file.path;
   if (!errors.isEmpty()) {
-    fs.unlink(req.file.path, (err) => {
+    fs.unlink(image, (err) => {
       if (err) {
         return next(err);
       }
