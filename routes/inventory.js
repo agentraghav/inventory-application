@@ -34,4 +34,6 @@ router.post(
 
 router.get('/genres/delete', genre_controller.genreDeleteGet);
 
+router.post('/genres/delete', genre_controller.genreDeletePost);
+
 module.exports = router;

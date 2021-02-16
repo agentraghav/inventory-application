@@ -59,7 +59,7 @@ exports.genreDeleteGet = (req, res, next) => {
         Genre.findById(id).exec(callback);
       },
       movie: (callback) => {
-        Movie.findById({ genre: id }).exec(callback);
+        Movie.find({ genre: id }).exec(callback);
       },
     },
     (error, results) => {
@@ -80,4 +80,40 @@ exports.genreDeleteGet = (req, res, next) => {
   );
 };
 
-exports.genreDeletePost = (req, res, next) => {};
+exports.genreDeletePost = (req, res, next) => {
+  const { id } = req.params;
+  const { genreId } = req.body;
+  async.parallel(
+    {
+      genre: (callback) => {
+        Genre.findById(id).exec(callback);
+      },
+      movie: (callback) => {
+        Movie.find({ genre: id }).exec(callback);
+      },
+    },
+    (error, results) => {
+      if (error) {
+        return next(error);
+      }
+      if (results.genre === null) {
+        const err = new Error('Not Found');
+        err.status = 404;
+        return next(err);
+      }
+      if (results.movie.length > 0) {
+        res.render('genre_delete', {
+          genre: results.genre,
+          movie: results.movie,
+        });
+      } else {
+        Genre.findByIdAndRemove(genreId, {}, (err) => {
+          if (err) {
+            return next(err);
+          }
+          res.redirect('/genres');
+        });
+      }
+    }
+  );
+};
