@@ -14,3 +14,14 @@ exports.movieList = (req, res, next) => {
     });
   });
 };
+
+exports.movieCreateGet = (req, res, next) => {
+  Genre.find({}, 'name').exec((error, genre) => {
+    if (error) {
+      return next(error);
+    }
+    res.render('movie_form', {
+      genre,
+    });
+  });
+};

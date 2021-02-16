@@ -50,4 +50,6 @@ router.get('/genres/:id/movie', genre_controller.genreMovie);
 
 router.get('/movie', movie_controller.movieList);
 
+router.get('/movie/create', movie_controller.movieCreateGet);
+
 module.exports = router;

@@ -1,0 +1,110 @@
+<%- include('header')%>
+
+<div class="container">
+  <form class="my-6" method="POST" action="" enctype="multipart/form-data">
+    <div class="field">
+      <label class="label">Name</label>
+      <div class="control">
+        <input
+          class="input"
+          type="text"
+          name="name"
+          placeholder="e.g RockJam 61 Key Keyboard Piano"
+          value=" <%= locals.movie === undefined ? '' : locals.movie.name %>"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Description</label>
+      <div class="control">
+        <input
+          class="input"
+          type="text"
+          name="description"
+          placeholder="Description"
+          value="<%= locals.movie === undefined ? '' : locals.movie.description %>"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Price</label>
+      <div class="control">
+        <input
+          class="input"
+          type="number"
+          name="price"
+          placeholder="Price"
+          value=" <%= locals.movie === undefined ? '' : locals.movie.price %> "
+          required
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Number of stock</label>
+      <div class="control">
+        <input
+          class="input"
+          type="number"
+          name="number_stock"
+          value=" <%= locals.movie === undefined ? '' : locals.movie.inStock %> "
+          required
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Genre</label>
+      <div class="control">
+        <div class="select">
+          <select name="genre">
+            <% genre.map(val=>{ %>
+            <option value="<%= val._id %>" <% if(val._id){ %>
+              selected <%}%> > <%= val.name %>
+            </option>
+            <% }) %>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Image</label>
+      <div class="control">
+        <%if(locals.movie) { %>
+        <figure class="image is-128x128 my-2">
+          <img
+            class="image is-128x128"
+            src="<%= locals.movie === undefined ? '' : locals.movie.image %>"
+          />
+        </figure>
+        <input
+          class="input"
+          type="file"
+          name="image"
+          value="<%= locals.movie === undefined ? '' : locals.movie.image %>"
+        />
+        <%} else {%>
+        <input class="input" type="file" name="image" required />
+        <%}%>
+      </div>
+    </div>
+
+    <div class="buttons mt-5">
+      <button class="button is-info">Submit</button>
+      <a href="/movie" class="button">Go back</a>
+    </div>
+  </form>
+
+  <div class="my-3">
+    <% locals.errors === undefined ? '' : locals.errors.map(val=>{ %>
+    <p class="subtitle has-text-danger">Error: <%= val.msg %></p>
+    <% }) %>
+  </div>
+</div>
+
+<%- include('footer')%>
