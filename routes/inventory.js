@@ -32,4 +32,6 @@ router.post(
   genre_controller.genreCreatePost
 );
 
+router.get('/genres/delete', genre_controller.genreDeleteGet);
+
 module.exports = router;

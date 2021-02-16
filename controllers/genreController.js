@@ -50,3 +50,32 @@ exports.genreCreatePost = (req, res, next) => {
     });
   }
 };
+
+exports.genreDeleteGet = (req, res, next) => {
+  const { id } = req.params;
+  async.parallel(
+    {
+      genre: (callback) => {
+        Genre.findById(id).exec(callback);
+      },
+      movie: (callback) => {
+        Movie.findById({ genre: id }).exec(callback);
+      },
+    },
+    (error, results) => {
+      if (error) {
+        return next(error);
+      }
+
+      if (results.genre === null) {
+        const err = new Error('Not Found');
+        err.status = 404;
+        return next(error);
+      }
+      res.render('genre_delete', {
+        genre: results.genre,
+        movie: results.movie,
+      });
+    }
+  );
+};
