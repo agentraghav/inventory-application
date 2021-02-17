@@ -1,0 +1,66 @@
+<%- include('header')%>
+<div class="container">
+  <form class="my-6" method="POST" action="" enctype="multipart/form-data">
+    <div class="field">
+      <label class="label">Name</label>
+      <div class="control">
+        <input
+          class="input"
+          type="text"
+          name="name"
+          placeholder="e.g Guitars"
+          value="<%= locals.genre === undefined ? '' : locals.genre.name %>"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Image</label>
+      <div class="control">
+        <% if(locals.genre) {%>
+        <figure class="image is-128x128">
+          <img
+            class="image is-128x128"
+            src="/<%= locals.genre === undefined ? '' : locals.genre.image %>"
+          />
+        </figure>
+        <input
+          class="input"
+          type="file"
+          name="image"
+          value="<%= locals.genre === undefined ? '' : locals.genre.image %>"
+        />
+        <%} else { %>
+        <input class="input" type="file" name="image" required />
+        <% } %>
+      </div>
+    </div>
+
+    <% if(locals.genre) {%>
+    <div class="field">
+      <label class="label">Admin password</label>
+      <div class="control has-icons-left">
+        <input class="input" type="password" name="password" required />
+        <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </div>
+    </div>
+    <% } %>
+
+    <div class="buttons my-6">
+      <button class="button is-info">Submit</button>
+      <a href="/genres" class="button">Go back</a>
+    </div>
+  </form>
+
+  <div class="my-3">
+    <% locals.errors === undefined ? '' : locals.errors.map(val=>{ %>
+    <p class="subtitle has-text-danger">
+      Error: <%= val.msg === undefined ? '' : val.msg %>
+    </p>
+    <%}) %>
+  </div>
+</div>
+<%- include('footer')%>

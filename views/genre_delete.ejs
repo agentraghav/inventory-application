@@ -1,0 +1,33 @@
+<%- include('header')%>
+<div class="container my-5">
+  <h1 class="title has-text-centered">
+    Delete the Category: <%= genre.name %>
+  </h1>
+
+  <% if(movie){ %>
+
+  <p class="subtitle mt-6">
+    Before deleting this Genre you need to delete the following items:
+  </p>
+  <% movie.map(val =>{ %>
+  <div class="content">
+    <ul>
+      <li><a href="<%= val.url %>"><%= val.name %></a></li>
+    </ul>
+  </div>
+  <%})%> <% } else { %.
+
+  <p class="subtitle my-4">Are you sure you want to delete this genre?</p>
+
+  <form action="" method="POST">
+    <input type="hidden" name="genreId" value="<%= genre._id %>" required />
+
+    <div class="buttons my-4">
+      <button class="button is-danger">Delete</button>
+      <a class="button" href="/genres">Go back</a>
+    </div>
+  </form>
+
+  <%} %>
+</div>
+<%- include('footer')%>
